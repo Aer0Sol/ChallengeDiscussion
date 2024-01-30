@@ -1,6 +1,6 @@
 # Premise
 
-Challenge asks us to be super-fast and for twenty 8-byte keys and to get the flag, simply perform decryption on the secret_message which is encrypted to receive the flag. Encryption done is DES with some shifts for certain parameters involved. Our Secret message is of the form:
+Challenge asks us to be super-fast and for twenty 8-byte keys and to get the flag, simply perform decryption on the secret_message which is encrypted to receive the flag. Encryption done is DES with some shifts for certain parameters involved. Our secret message is of the form:
 
 ```b'TOP_SECRET:' + os.urandom(40)```
 
@@ -14,11 +14,11 @@ Let's start by analysing whether all 20 keys are used. Turns out, due to the STE
 ![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/232a7055-fdbb-4dc3-bde7-786431d86153)
 
 
-With a bit of analysis, it is clear that HKEY doesn't "directly" really take part in the encryption process except for its length serving as a parameter for modifying NKEY which is later on used in the encryption.
+With a bit of analysis, it is clear that HKEY doesn't "directly" take part in the encryption process except for its length serving as a parameter for modifying NKEY which is later on used in the encryption.
 Shift() function can be analysed directly using ic(). 
 Our biggest problem yet comes from the shuffle() function as it uses a PRNG to shuffle the NKEY.
 
-I initially used ic() from icecream module for seeing what happens inside each updation of NKEY but swapped it with print on the final run. We also note what was in NKEY initially before the shift() for later use in Decryption.
+I initially used ic() from icecream module for seeing what happens inside each updation of NKEY but swapped it with print on the final run. We also note what was in NKEY initially before the shift() for later use in decryption.
 
 ![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/d3672356-3bfa-4e2a-bb78-d7674bbcafa6)
 
