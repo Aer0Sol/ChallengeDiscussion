@@ -1,6 +1,6 @@
 # Premise
 
-Challenge asks us to be super-fast and asks for twenty 8-byte keys and to get the flag, simply perform decryption on the secret_message which is encrypted to receive the flag. Encryption done is DES with some shifts for certain parameters involved. Our Secret message is of the form:
+Challenge asks us to be super-fast and for twenty 8-byte keys and to get the flag, simply perform decryption on the secret_message which is encrypted to receive the flag. Encryption done is DES with some shifts for certain parameters involved. Our Secret message is of the form:
 
 ```b'TOP_SECRET:' + os.urandom(40)```
 
