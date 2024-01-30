@@ -27,7 +27,7 @@ I initially used ic() from icecream module for seeing what happens inside each u
 
 It is clear that shift() function takes the 13th and 14th key and produces an alternating pattern which is consistent given the same 13th and 14th key supplied. So we can use this as a constant for performing DES Decryption on the client side.
 
-Using pwntools, we can connect to the server and supply our payload but since we are not sure of the final 7 keys in NKEY due to the shuffle() function, we can import permutations from itertools and run through all possible configuration of NKEY for DES Decryption before the server closes.
+Using pwntools, we can connect to the server and supply our payload but since we are not sure of the final 7 keys in NKEY due to the shuffle() function, we can import permutations from itertools and run through all possible configurations of NKEY for DES Decryption before the server closes.
 
 ![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/9678ce7a-2815-42ef-8108-b632532926e9)
 
