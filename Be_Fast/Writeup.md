@@ -6,7 +6,7 @@ Challenge asks us to be super-fast and for twenty 8-byte keys and to get the fla
 
 # Vulnerability
 
-This challenge's intended way to solve is to use Weak DES keys but I exploited the way in which Keys were used in Encryption (NKEY).
+This challenge's intended way to solve is to use Weak DES keys but I exploited the way in which keys were used in encryption (NKEY).
 
 # Solution
 Let's start by analysing whether all 20 keys are used. Turns out, due to the STEP variable, only the first 14 are used and the rest are redundant.
