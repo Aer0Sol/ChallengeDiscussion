@@ -15,7 +15,7 @@ Let's start by analysing whether all 20 keys are used. Turns out, due to the STE
 
 
 With a bit of analysis, it is clear that HKEY doesn't "directly" really take part in the encryption process except for its length serving as a parameter for modifying NKEY which is later on used in the encryption.
-Shift() function can be analysed directly using ic() 
+Shift() function can be analysed directly using ic(). 
 Our biggest problem yet comes from the shuffle() function as it uses a PRNG to shuffle the NKEY.
 
 I initially used ic() from icecream module for seeing what happens inside each updation of NKEY but swapped it with print on the final run. We also note what was in NKEY initially before the shift() for later use in Decryption.
