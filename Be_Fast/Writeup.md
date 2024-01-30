@@ -21,5 +21,6 @@ It is clear that shift() function takes the 13th and 14th key and produces an al
 Using pwntools, we can connect to the server and supply our payload but since we are not sure of the final 7 keys in NKEY due to the shuffle() function, we can import permutations from itertools and run through all possible configuration of NKEY for DES Decryption before the server closes.
 
 And thus, the flag:
-MAPNA{DES_h4s_A_f3W_5pec1f!c_kEys_7eRm3d_we4K_k3Ys_And_Sem1-wE4k_KeY5!}
+
+```MAPNA{DES_h4s_A_f3W_5pec1f!c_kEys_7eRm3d_we4K_k3Ys_And_Sem1-wE4k_KeY5!}```
   
