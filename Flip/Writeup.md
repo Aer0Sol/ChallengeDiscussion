@@ -9,7 +9,7 @@ Server doesn't give any prompt but from main.py it is clear we have to supply ou
 
 # Vulnerability
 
-After some research, I landed on DFA (Differential Fault Attack) on AES which happens either on the 8th or 9th round of AES Encryption. But since we don't have a window to do the fault injection then, I used Brute-Force from the start of main()s offset to the end of main()'s offset.
+After some research, I landed on DFA (Differential Fault Attack) on AES which happens either on the 8th or 9th round of AES Encryption. But since we don't have a window to do the fault injection then, I used Brute-Force from the start of main()'s offset to the end of main()'s offset.
 This was because the offset of the plaintext and the key had a difference of exactly 16 bits which is 2^4 or a power of 2. Which means during writing the modified plaintext (ciphertext) into the file before execution, we can force it to write the key.
 
 # Solution
