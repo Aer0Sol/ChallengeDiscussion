@@ -46,7 +46,7 @@ int main() {
     struct AES_ctx ctx;
     AES_init_ctx(&ctx, key);
     AES_ECB_encrypt(&ctx, plaintext);
-    write(STDOUT_FILENO, plaintext, 16);
+    write(STDOUT_FILENO, plaintext, 16); // We can modify exactly here in main() so that STDOUT_FILENO writes the key instead of ciphertext
     return 0;
 }
 ```
