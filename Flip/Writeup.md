@@ -23,7 +23,33 @@ Server doesn't give any prompt but from main.py it is clear we have to supply ou
 # Vulnerability
 
 After some research, I landed on DFA (Differential Fault Analysis) on AES which happens either on the 8th or 9th round of AES Encryption. But since we don't have a window to do the fault injection then, I used Brute-Force from the start of main()'s offset to the end of main()'s offset.
-This was because the offset of the plaintext and the key had a difference of exactly 16 bits which is 2^4 or a power of 2. Which means during writing the modified plaintext (ciphertext) into the file before execution, we can force it to write the key.
+This was because the offset of the plaintext and the key had a difference of exactly 16 bits which is 2^4 or a power of 2.
+
+```py
+OFFSET_PLAINTEXT = 0x4010
+OFFSET_KEY = 0x4020
+```
+
+Which means during writing the modified plaintext (ciphertext) into the file before execution, we can force it to write the key.
+
+```c
+// To compile:
+// git clone https://github.com/kokke/tiny-AES-c
+// gcc encrypt.c tiny-AES-c/aes.c
+#include "tiny-AES-c/aes.h"
+#include <unistd.h>
+
+uint8_t plaintext[16] = {0x20, 0x24};
+uint8_t key[16] = {0x20, 0x24};
+
+int main() {
+    struct AES_ctx ctx;
+    AES_init_ctx(&ctx, key);
+    AES_ECB_encrypt(&ctx, plaintext);
+    write(STDOUT_FILENO, plaintext, 16);
+    return 0;
+}
+```
 
 # Solution
 
