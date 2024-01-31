@@ -7,9 +7,11 @@ We are given main.py, encrypt.c, a dockerfile and encrypt ELF file. We are also 
 
 Server doesn't give any prompt but from main.py it is clear we have to supply our plaintext in hex of 16 bytes, i_str which acts as the index where we do the fault injection and j_str the amount of bit shifts we are able to do.
 
-![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/519767a0-d0ce-43c3-8476-f9eecf58de59)
-
-![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/acf5e175-7b0b-43fe-81bf-441c863982c9)
+```py
+ # input format: hex(plaintext) i j
+    try:
+        plaintext_hex, i_str, j_str = input().split()
+```
 
 
 # Vulnerability
