@@ -13,6 +13,12 @@ Server doesn't give any prompt but from main.py it is clear we have to supply ou
         plaintext_hex, i_str, j_str = input().split()
 ```
 
+```py
+ # update key, plaintext, and inject the fault
+    content[OFFSET_KEY:OFFSET_KEY + 16] = key
+    content[OFFSET_PLAINTEXT:OFFSET_PLAINTEXT + 16] = pt
+    content[i] ^= (1 << j)
+```
 
 # Vulnerability
 
@@ -23,7 +29,42 @@ This was because the offset of the plaintext and the key had a difference of exa
 
 Due to the hint from Flip_v2, I stuck to brute-forcing only main()'s offsets and nothing else in the ELF file.
 
-![image](https://github.com/Aer0Sol/ChallengeDiscussion/assets/112194832/eb997f2b-7564-4053-bb9b-b4d7f24bf684)
+```py
+from pwn import *
+from Crypto.Util.number import long_to_bytes as l2b, bytes_to_long as b2l
+
+OFFSET_MAIN_START = 0x1169
+OFFSET_MAIN_END = 0x11ed
+
+l=[]
+for i in range(OFFSET_MAIN_START,OFFSET_MAIN_END+1):
+    for shift in range(1,8):
+
+        try:
+            io=remote('139.162.24.230', 31339)
+            print(i, shift)
+
+            pt=('0'*32)
+            payload=f'{pt} {i} {shift}'
+            io.sendline(payload)
+
+            ct=io.recvline()
+            ct=bytes.fromhex(ct[:-1].decode())
+            io.sendline((ct).hex())
+
+            k=io.recvline()
+            l.append(k)
+            if(k):
+                print(k.decode()+", "+str(i)+", "+str(shift))
+                sys.exit()
+                
+
+        except EOFError:
+            continue
+
+
+print(l)  
+```
 
 I used nc to remotely connect to the server but after attempting Flip_v2, I realised I could've done it locally given the ELF file and could have saved a lot of minutes.
 It exactly landed on this offset and shift value:
